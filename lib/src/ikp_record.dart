@@ -4,19 +4,19 @@ import 'ikp_utils.dart';
 class IkpRecord {
   final String recordType;
   final String recordName;
-  final Map<String, dynamic> values;
+  final Map<String, dynamic> fields;
 
   IkpRecord({
     required this.recordType,
     required this.recordName,
-    required this.values,
+    required this.fields,
   });
 
   factory IkpRecord.fromJson(Map<dynamic, dynamic> data) {
     return IkpRecord(
       recordType: IkpUtils.getStrValue(data[IkpConstants.recordType]),
       recordName: IkpUtils.getStrValue(data[IkpConstants.recordName]),
-      values: _parseRecordValue(data[IkpConstants.recordValue]),
+      fields: _parseRecordValue(data[IkpConstants.recordValue]),
     );
   }
 
@@ -28,6 +28,6 @@ class IkpRecord {
 
   @override
   String toString() {
-    return "IkpRecord{recordType: $recordType, recordName: $recordName, values: $values}";
+    return "IkpRecord{recordType: $recordType, recordName: $recordName, fields: $fields}";
   }
 }

@@ -13,16 +13,16 @@ class MethodChannelIcloudKitProvider extends IcloudKitProviderPlatform {
 
   /// 实现自定义接口
   @override
-  Future<Map<dynamic, dynamic>> call(Map<dynamic, dynamic> handler) async {
+  Future<Map<dynamic, dynamic>> call(Map<dynamic, dynamic> data) async {
     var flag = DateTime.now().millisecondsSinceEpoch;
     log("""request params from flutter : $flag
 *******************************
-$handler
+$data
 *******************************""");
     try {
       Map<dynamic, dynamic> result = await methodChannel.invokeMethod(
         'handler',
-        handler,
+        data,
       );
 
       log("""response result from ios : $flag

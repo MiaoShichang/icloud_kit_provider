@@ -23,7 +23,7 @@ abstract class IcloudKitProviderPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<Map<dynamic, dynamic>> call(Map<dynamic, dynamic> handler) async {
+  Future<Map<dynamic, dynamic>> call(Map<dynamic, dynamic> data) async {
     throw UnimplementedError('call() has not been implemented.');
   }
 }

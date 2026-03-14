@@ -1,5 +1,11 @@
-## 1.0.0
 
-初始化代码
+# 1.1.0
+- Fix package issues
+- Optimized some functions
+- Added more comments
+
+
+# 1.0.0
+- Initial version.
 
 

@@ -17,6 +17,7 @@ export 'src/ikp_response.dart';
 export 'src/ikp_sort.dart';
 
 abstract class IcloudKitProvider {
+  /// Creates a new instance of [IcloudKitProvider].
   factory IcloudKitProvider({
     String? containerId,
     IkpDatabaseScope scope = IkpDatabaseScope.private,
@@ -29,18 +30,21 @@ abstract class IcloudKitProvider {
     throw UnimplementedError('getAccountStatus() has not been implemented.');
   }
 
+  /// Add or update a record.
   Future<IkpResponse<IkpRecord>> saveRecord({
     required String recordType,
-    required Map<String, dynamic> values,
+    required Map<String, dynamic> fields,
     String? recordName,
   }) async {
     throw UnimplementedError('saveRecord() has not been implemented.');
   }
 
+  /// Get a record by name.
   Future<IkpResponse<IkpRecord>> getRecord({required String recordName}) async {
     throw UnimplementedError('getRecord() has not been implemented.');
   }
 
+  /// Get a list of records
   Future<IkpResponse<IkpListRecord>> getRecords({
     required String recordType,
     String cursor = "",
@@ -50,6 +54,7 @@ abstract class IcloudKitProvider {
     throw UnimplementedError('getRecords() has not been implemented.');
   }
 
+  /// Get all records
   Future<IkpResponse<List<IkpRecord>>> getAll({
     required String recordType,
     List<String>? fields,
@@ -57,14 +62,17 @@ abstract class IcloudKitProvider {
     throw UnimplementedError('getAll() has not been implemented.');
   }
 
+  /// Delete a record
   Future<IkpResponse<String>> deleteRecord({required String recordName}) async {
     throw UnimplementedError('deleteRecord() has not been implemented.');
   }
 
+  /// Clear all records
   Future<IkpResponse<int>> clearRecord({required String recordType}) async {
     throw UnimplementedError('clearRecord() has not been implemented.');
   }
 
+  /// Find records
   Future<IkpResponse<IkpListRecord>> findRecords({
     required String recordType,
     List<IkpFilter>? filters,

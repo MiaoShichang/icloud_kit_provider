@@ -131,9 +131,7 @@ class _HomePageState extends State<HomePage> {
         IkpFilter(field: "index", operator: IkpOperator.lessThan, value: 50),
       ],
       fields: ["index", "name", "vip"],
-      sortFields: [
-        IkpSort(field: "index", direction: IkpSortDirection.ascending),
-      ],
+      sortFields: [IkpSort(field: "index")],
     );
 
     showResult(result);
@@ -144,7 +142,7 @@ class _HomePageState extends State<HomePage> {
       var values = makeValues(i);
       var r = await provider.saveRecord(
         recordType: "auth_item_test",
-        values: values,
+        fields: values,
       );
       if (r.isOK()) {
         info("save record: ${r.data}");
@@ -156,15 +154,6 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _result = "add records success";
     });
-    // var result = await provider.saveRecord(
-    //   recordType: "auth_item",
-    //   values: {
-    //     "name": "test",
-    //     "code": "123456",
-    //     "data": {"name": "test"}.toString(),
-    //   },
-    // );
-    // showResult(result);
   }
 
   Map<String, dynamic> makeValues(int index) {
@@ -187,9 +176,3 @@ class _HomePageState extends State<HomePage> {
     dev.log(msg);
   }
 }
-
-// {
-//  recordType: auth_item_test,
-//  recordName: 95A891EF-6780-4477-9424-68B386645385,
-//  recordValue: {code: 123456, name: test}
-// }
