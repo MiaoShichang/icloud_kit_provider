@@ -1,3 +1,5 @@
+# 1.2.0
+- Fix some issues
 
 # 1.1.0
 - Fix package issues

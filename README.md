@@ -86,27 +86,44 @@ Future<IkpResponse<IkpListRecord>> findRecords({
   int limit = 20,
 });
 
+// example
+  var resp = await provider.findRecords(
+    recordType: "users",
+    filters: [
+      IkpFilter(field: "index", operator: IkpOperator.inList,value: [154, 155],),
+    ],
+    fields: ["index", "name", "age"],
+    sortFields: [
+      IkpSort(field: "index"),
+    ],
+    limit: 20,
+  );
+  if (resp.isOK()) {
+    LogUtil.print("records count: ${resp.data?.list.length}");
+  } else {
+    LogUtil.print("find records error: ${resp.msg}");
+  }
+
 ```
 
-# **readme** 
-**arguments** 
-- containerId: The container ID of the iCloud Kit Database. Default is "".
-- scope: The scope of the iCloud Kit Database. Default is `private`.
-- recordType: The recordType of the iCloud Kit Database. 
-- recordName: The recordName of the iCloud Kit Database. 
+
+# Arguments
+- *containerId*: The container ID of the iCloud Kit Database. Default is "".
+- *scope*: The scope of the iCloud Kit Database. Default is `private`.
+- *recordType*: The recordType of the iCloud Kit Database. 
+- *recordName*: The recordName of the iCloud Kit Database. 
   - When recordName is empty, the saveRecord function adds new record; 
   - when recordName is not empty: 
     - if the value of recordName exists in the database, it updates the record; 
     - otherwise, it adds new record.
-- filters:  Database conditions for finding records. Default is `null`.
-- sortFields: The sortFields of the iCloud Kit Database. Default is `null`.
-- fields: The fields of the iCloud Kit Database. if set to null, all fields are returned; if set to [], the values in the records are returned as empty. Default is `null`.
+- *filters*:  Database conditions for finding records. Default is `null`.
+- *sortFields*: The sortFields of the iCloud Kit Database. Default is `null`.
+- *fields*: The fields of the iCloud Kit Database. if set to null, all fields are returned; if set to [], the values in the records are returned as empty. Default is `null`.
 
-- limit: The limit of the iCloud Kit Database. Default is `20`.
-- cursor: The cursor of the iCloud Kit Database. Use cursor in conjunction with limit. If there are more records, the cursor is not empty; if there are no more record, the cursor is "".Default is `""`.
+- *limit*: The limit of the iCloud Kit Database. Default is `20`.
+- *cursor*: The cursor of the iCloud Kit Database. Use cursor in conjunction with limit. If there are more records, the cursor is not empty; if there are no more record, the cursor is "".Default is `""`.
 
-
-**Configure Xcode**
+# Configure Xcode
 See [Enabling CloudKit in Your App](https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/inspecting_and_editing_an_icloud_container_s_schema#3404860).
 
 Basically, before you start using the plugin, you need to:
@@ -116,6 +133,8 @@ Basically, before you start using the plugin, you need to:
 - Check the box next to the container name;
 - Also, in order to be able to retrieve records by type, you will need to add some indexes to the CloudKit database.
 
+
+# Configure CloudKit Database
 See [Enable Querying for Your Record Type](https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/inspecting_and_editing_an_icloud_container_s_schema#3404860).
 
 **For every new record type you'll need to do the following:**
@@ -129,6 +148,11 @@ See [Enable Querying for Your Record Type](https://developer.apple.com/documenta
    - FIELD: createdTimestamp and Index Type: SORTABLE (needed to sort them by creation time).
 7. Click Save Changes
 
+
+# Confirm Deployment
+1. Go to the CloudKit Console;
+2. Select Deployment Scheme Changes
+3. Click  Deploy
 
 
 

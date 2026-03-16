@@ -45,7 +45,7 @@ public class IKPGetHandler : IKPHandler {
         
         // 3. 构建查询
         let predicate = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "creationDate", ascending: true)
+        let sort = NSSortDescriptor(key: "createdTimestamp", ascending: true)
         let query = CKQuery(recordType: recordType, predicate: predicate)
         query.sortDescriptors = [sort]
         

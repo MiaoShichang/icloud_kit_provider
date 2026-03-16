@@ -16,6 +16,7 @@ export 'src/ikp_record.dart';
 export 'src/ikp_response.dart';
 export 'src/ikp_sort.dart';
 
+/// iCloud Kit Provider.
 abstract class IcloudKitProvider {
   /// Creates a new instance of [IcloudKitProvider].
   factory IcloudKitProvider({
