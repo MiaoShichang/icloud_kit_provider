@@ -36,7 +36,7 @@ public class IKPSaveHandler  : IKPHandler {
                 record!.setValuesForKeys(recordValues);
                 r = record!
             }
-            database.save(record!) { (record, error) in
+            database.save(r) { (record, error) in
                 if (error != nil) {
                     callback(IKPUtils.errorResponse(code: 203, msg:  error!.localizedDescription));
                     return

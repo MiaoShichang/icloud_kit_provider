@@ -1,3 +1,6 @@
+# 1.5.0
+- Fix some issues
+
 # 1.4.0
 - Fix some issues
 
