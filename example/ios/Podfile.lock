@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - icloud_kit_provider (0.0.1):
+  - icloud_kit_provider (1.0.0):
     - Flutter
   - integration_test (0.0.1):
     - Flutter
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  icloud_kit_provider: 84255addf1d0551455fc54addd940c1a6f0eae2e
+  icloud_kit_provider: 7d68f16892aa287cf037dad0056f4ee3517cb253
   integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
 
 PODFILE CHECKSUM: 3d68f7cb47d5f2fb7765407f663653c9b51100f3

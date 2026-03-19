@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // final provider = IcloudKitProvider(containerId: "iCloud.com.houyzx.iauthcode");
+  // final provider = IcloudKitProvider(containerId: "iCloud.icloud_kit_provider");
   final provider = IcloudKitProvider(containerId: "");
   String _result = 'Unknown';
   final Random _random = Random();
@@ -82,7 +82,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getAll() async {
-    var result = await provider.getAll(recordType: "auth_item");
+    var result = await provider.getAll(
+      recordType: "auth_text",
+      sortFields: [IkpSort(field: "index", asc: false)],
+    );
+    for (var item in result.data ?? []) {
+      info("index = ${item.fields["index"]}");
+    }
     if (result.isOK()) {
       setState(() {
         _result = "all count: ${result.data?.length}";

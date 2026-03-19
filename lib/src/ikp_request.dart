@@ -108,9 +108,19 @@ class IkpRequest implements IcloudKitProvider {
     String cursor = "",
     int limit = 20,
     List<String>? fields,
+    List<IkpSort>? sortFields,
   }) async {
     if (limit > 100) limit = 100;
     if (limit <= 0) limit = 20;
+
+    List<Map<String, dynamic>> sortList = [];
+    if (sortFields != null) {
+      for (var sort in sortFields) {
+        if (sort.isValid()) {
+          sortList.add(sort.toJson());
+        }
+      }
+    }
 
     var result = await handler.call(
       method: IkpConstants.getRecords,
@@ -119,6 +129,7 @@ class IkpRequest implements IcloudKitProvider {
         IkpConstants.limit: limit,
         IkpConstants.cursor: cursor,
         IkpConstants.fields: fields,
+        IkpConstants.sortFields: sortList,
       },
     );
 
@@ -137,6 +148,7 @@ class IkpRequest implements IcloudKitProvider {
   Future<IkpResponse<List<IkpRecord>>> getAll({
     required String recordType,
     List<String>? fields,
+    List<IkpSort>? sortFields,
   }) async {
     List<IkpRecord> datalist = [];
     var limit = 100;
@@ -144,6 +156,7 @@ class IkpRequest implements IcloudKitProvider {
       recordType: recordType,
       limit: limit,
       fields: fields,
+      sortFields: sortFields,
     );
     IkpResponse<List<IkpRecord>> response = IkpResponse(
       code: rlr.code,
@@ -163,6 +176,7 @@ class IkpRequest implements IcloudKitProvider {
         limit: limit,
         cursor: cursor,
         fields: fields,
+        sortFields: sortFields,
       );
       if (result.isOK() &&
           result.data != null &&

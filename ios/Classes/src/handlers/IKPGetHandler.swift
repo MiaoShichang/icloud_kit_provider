@@ -41,19 +41,17 @@ public class IKPGetHandler : IKPHandler {
             callback(IKPUtils.errorResponse(code: 201, msg: "Couldn't parse the required parameter 'recordType'"))
             return
         }
-        
-        
-        // 3. 构建查询
-        let predicate = NSPredicate(value: true)
-        let sort = NSSortDescriptor(key: "createdTimestamp", ascending: true)
-        let query = CKQuery(recordType: recordType, predicate: predicate)
-        query.sortDescriptors = [sort]
-        
+
         // 4. 创建操作（支持游标）
         let operation: CKQueryOperation
         if let cursor = IKPUtils.parseCursor(cursorData: params[IKPConstants.cursor] as? String) {
             operation = CKQueryOperation(cursor: cursor)
         } else {
+            let predicate = IKPUtils.createPredicate(from: params[IKPConstants.filters] as? [[String: Any]] ?? [])
+            let query = CKQuery(recordType: recordType, predicate: predicate)
+            if let sortFields = params[IKPConstants.sortFields] as? [[String: Any]] {
+                query.sortDescriptors = IKPUtils.createSortDescriptors(from: sortFields)
+            }
             operation = CKQueryOperation(query: query)
         }
         

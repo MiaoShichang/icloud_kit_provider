@@ -51,6 +51,7 @@ abstract class IcloudKitProvider {
     String cursor = "",
     int limit = 20,
     List<String>? fields,
+    List<IkpSort>? sortFields,
   }) async {
     throw UnimplementedError('getRecords() has not been implemented.');
   }
@@ -59,6 +60,7 @@ abstract class IcloudKitProvider {
   Future<IkpResponse<List<IkpRecord>>> getAll({
     required String recordType,
     List<String>? fields,
+    List<IkpSort>? sortFields,
   }) async {
     throw UnimplementedError('getAll() has not been implemented.');
   }

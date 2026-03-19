@@ -108,20 +108,20 @@ Future<IkpResponse<IkpListRecord>> findRecords({
 
 
 # Arguments
-- *containerId*: The container ID of the iCloud Kit Database. Default is "".
-- *scope*: The scope of the iCloud Kit Database. Default is `private`.
-- *recordType*: The recordType of the iCloud Kit Database. 
-- *recordName*: The recordName of the iCloud Kit Database. 
+- ***containerId***: The container ID of the iCloud Kit Database. Default is "".
+- ***scope***: The scope of the iCloud Kit Database. Default is `private`.
+- ***recordType***: The recordType of the iCloud Kit Database. 
+- ***recordName***: The recordName of the iCloud Kit Database. 
   - When recordName is empty, the saveRecord function adds new record; 
   - when recordName is not empty: 
     - if the value of recordName exists in the database, it updates the record; 
     - otherwise, it adds new record.
-- *filters*:  Database conditions for finding records. Default is `null`.
-- *sortFields*: The sortFields of the iCloud Kit Database. Default is `null`.
-- *fields*: The fields of the iCloud Kit Database. if set to null, all fields are returned; if set to [], the values in the records are returned as empty. Default is `null`.
+- ***filters***:  Database conditions for finding records. Default is `null`.
+- ***sortFields***: The sortFields of the iCloud Kit Database. Default is `null`.
+- ***fields***: The fields of the iCloud Kit Database. if set to null, all fields are returned; if set to [], the values in the records are returned as empty. Default is `null`.
 
-- *limit*: The limit of the iCloud Kit Database. Default is `20`.
-- *cursor*: The cursor of the iCloud Kit Database. Use cursor in conjunction with limit. If there are more records, the cursor is not empty; if there are no more record, the cursor is "".Default is `""`.
+- ***limit***: The limit of the iCloud Kit Database. Default is `20`.
+- ***cursor***: The cursor of the iCloud Kit Database. Use cursor in conjunction with limit. If there are more records, the cursor is not empty; if there are no more record, the cursor is "". Default is `""`.
 
 # Configure Xcode
 See [Enabling CloudKit in Your App](https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/inspecting_and_editing_an_icloud_container_s_schema#3404860).
@@ -143,9 +143,8 @@ See [Enable Querying for Your Record Type](https://developer.apple.com/documenta
 3. Select your database;
 4. Go to the Indexes;
 5. Select your record type;
-6. Click Add Basic Index and create two indexes:
+6. Click Add Basic Index and create recordName indexes:
    - FIELD: recordName and Index Type: QUERYABLE (needed to fetch records);
-   - FIELD: createdTimestamp and Index Type: SORTABLE (needed to sort them by creation time).
 7. Click Save Changes
 
 
