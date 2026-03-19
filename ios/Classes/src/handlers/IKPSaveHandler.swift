@@ -25,20 +25,28 @@ public class IKPSaveHandler  : IKPHandler {
         } else {
             recordId = CKRecord.ID();
         }
-        
-        let record = CKRecord(recordType: recordType, recordID: recordId);
-        record.setValuesForKeys(recordValues);
-        
-        database.save(record) { (record, error) in
-            if (error != nil) {
-                callback(IKPUtils.errorResponse(code: 203, msg:  error!.localizedDescription));
-                return
+
+        // 尝试获取现有记录
+        database.fetch(withRecordID: recordId) { record, error in
+            var  r : CKRecord
+            if record == nil {
+                r = CKRecord(recordType: recordType, recordID: recordId);
+                r.setValuesForKeys(recordValues);
+            }else{
+                record!.setValuesForKeys(recordValues);
+                r = record!
             }
-            if (record == nil) {
-                callback(IKPUtils.errorResponse(code:204, msg: "Got nil while saving the record"));
-                return
+            database.save(record!) { (record, error) in
+                if (error != nil) {
+                    callback(IKPUtils.errorResponse(code: 203, msg:  error!.localizedDescription));
+                    return
+                }
+                if (record == nil) {
+                    callback(IKPUtils.errorResponse(code:204, msg: "Got nil while saving the record"));
+                    return
+                }
+                callback(IKPUtils.successResponse(data: IKPUtils.record2Dict(record: record!)));
             }
-            callback(IKPUtils.successResponse(data: IKPUtils.record2Dict(record: record!)));
         }
     }
 }
